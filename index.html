@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shy Tangerine - Family-Friendly Indie Games</title>
+    <meta name="description" content="Shy Tangerine creates magical casual games designed for families to play together. Bringing kids and parents closer through fun, engaging gaming experiences.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234a4a4a'/><g fill='%23ff6b35'><path d='M50 20c-8 0-14 6-14 14 0 4 2 8 5 10l7-7c3-3 3-8 0-11-1-1-3-2-5-2s-4 1-5 2l7 7c3 3 3 8 0 11s-8 3-11 0-3-8 0-11l7-7c-3-2-7-6-7-10 0-8 6-14 14-14z' transform='rotate(0 50 50)'/><path d='M50 20c-8 0-14 6-14 14 0 4 2 8 5 10l7-7c3-3 3-8 0-11-1-1-3-2-5-2s-4 1-5 2l7 7c3 3 3 8 0 11s-8 3-11 0-3-8 0-11l7-7c-3-2-7-6-7-10 0-8 6-14 14-14z' transform='rotate(51.4 50 50)'/><path d='M50 20c-8 0-14 6-14 14 0 4 2 8 5 10l7-7c3-3 3-8 0-11-1-1-3-2-5-2s-4 1-5 2l7 7c3 3 3 8 0 11s-8 3-11 0-3-8 0-11l7-7c-3-2-7-6-7-10 0-8 6-14 14-14z' transform='rotate(102.8 50 50)'/><path d='M50 20c-8 0-14 6-14 14 0 4 2 8 5 10l7-7c3-3 3-8 0-11-1-1-3-2-5-2s-4 1-5 2l7 7c3 3 3 8 0 11s-8 3-11 0-3-8 0-11l7-7c-3-2-7-6-7-10 0-8 6-14 14-14z' transform='rotate(154.2 50 50)'/><path d='M50 20c-8 0-14 6-14 14 0 4 2 8 5 10l7-7c3-3 3-8 0-11-1-1-3-2-5-2s-4 1-5 2l7 7c3 3 3 8 0 11s-8 3-11 0-3-8 0-11l7-7c-3-2-7-6-7-10 0-8 6-14 14-14z' transform='rotate(205.6 50 50)'/><path d='M50 20c-8 0-14 6-14 14 0 4 2 8 5 10l7-7c3-3 3-8 0-11-1-1-3-2-5-2s-4 1-5 2l7 7c3 3 3 8 0 11s-8 3-11 0-3-8 0-11l7-7c-3-2-7-6-7-10 0-8 6-14 14-14z' transform='rotate(257 50 50)'/></g></svg>">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #ff8a50 0%, #ff6b35 50%, #f7931e 100%) !important;
+        }
+        .gradient-secondary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        .bounce-gentle {
+            animation: bounceGentle 3s ease-in-out infinite;
+        }
+        @keyframes bounceGentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(-5px) rotate(-1deg); }
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Shy Tangerine Logo Styles */
+        .shy-logo {
+            width: 48px;
+            height: 48px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .shy-logo-large {
+            width: 120px;
+            height: 120px;
+        }
+
+        .logo-circle {
+            width: 100%;
+            height: 100%;
+            background: #4a4a4a;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-petal {
+            position: absolute;
+            background: #ff6b35;
+            border-radius: 50% 0;
+            transform-origin: 100% 100%;
+        }
+
+        .logo-petal:nth-child(1) {
+            width: 45%;
+            height: 45%;
+            top: 5%;
+            left: 27.5%;
+            transform: rotate(0deg);
+        }
+
+        .logo-petal:nth-child(2) {
+            width: 45%;
+            height: 45%;
+            top: 13.5%;
+            right: 5%;
+            transform: rotate(51.4deg);
+        }
+
+        .logo-petal:nth-child(3) {
+            width: 45%;
+            height: 45%;
+            bottom: 13.5%;
+            right: 5%;
+            transform: rotate(102.8deg);
+        }
+
+        .logo-petal:nth-child(4) {
+            width: 45%;
+            height: 45%;
+            bottom: 5%;
+            left: 27.5%;
+            transform: rotate(154.2deg);
+        }
+
+        .logo-petal:nth-child(5) {
+            width: 45%;
+            height: 45%;
+            bottom: 13.5%;
+            left: 5%;
+            transform: rotate(205.6deg);
+        }
+
+        .logo-petal:nth-child(6) {
+            width: 45%;
+            height: 45%;
+            top: 13.5%;
+            left: 5%;
+            transform: rotate(257deg);
+        }
+
+        .logo-petal:nth-child(7) {
+            width: 45%;
+            height: 45%;
+            top: 27.5%;
+            left: 27.5%;
+            transform: rotate(308.4deg);
+        }
+
+        /* Brand colors based on logo */
+        .brand-orange { color: #ff6b35; }
+        .brand-dark { color: #4a4a4a; }
+        .bg-brand-orange { background-color: #ff6b35; }
+        .bg-brand-dark { background-color: #4a4a4a; }
+        .border-brand-orange { border-color: #ff6b35; }
+
+        /* Logo animation */
+        .logo-rotate {
+            animation: logoRotate 20s linear infinite;
+        }
+        @keyframes logoRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="shy-logo">
+                        <div class="logo-circle">
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                        </div>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-2xl font-bold brand-dark">Shy Tangerine</div>
+                        <div class="text-xs text-gray-500 -mt-1">Game Studio</div>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium transition-colors">About</a>
+                    <a href="#games" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium transition-colors">Our Games</a>
+                    <a href="#philosophy" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium transition-colors">Our Philosophy</a>
+                    <a href="#contact" class="bg-brand-orange text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-orange-600 transition-colors">Get in Touch</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-orange-500">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-orange-500">About</a>
+                <a href="#games" class="block px-3 py-2 text-gray-700 hover:text-orange-500">Our Games</a>
+                <a href="#philosophy" class="block px-3 py-2 text-gray-700 hover:text-orange-500">Our Philosophy</a>
+                <a href="#contact" class="block px-3 py-2 text-orange-500 font-medium">Get in Touch</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg hero-pattern pt-20 pb-16 overflow-hidden" style="background: linear-gradient(135deg, #ff8a50 0%, #ff6b35 50%, #f7931e 100%) !important;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+            <div class="text-center">
+                <div class="float-animation inline-block">
+                    <div class="shy-logo shy-logo-large logo-rotate">
+                        <div class="logo-circle">
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                            <div class="logo-petal"></div>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 mt-6">
+                    Welcome to
+                    <span class="text-yellow-200">Shy Tangerine</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-orange-100 mb-8 max-w-3xl mx-auto">
+                    We create magical casual games designed for families to play together.
+                    Bringing kids and parents closer through fun, engaging gaming experiences.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <div class="bg-white/20 backdrop-blur-sm border border-white/30 px-8 py-4 rounded-full text-white">
+                        <span class="text-lg font-semibold">🎮 Our first game is coming soon!</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Game Elements -->
+            <div class="mt-16 relative">
+                <div class="flex justify-center space-x-8 text-6xl">
+                    <div class="bounce-gentle" style="animation-delay: 0s;">🎯</div>
+                    <div class="bounce-gentle" style="animation-delay: 1s;">🧩</div>
+                    <div class="bounce-gentle" style="animation-delay: 2s;">🎨</div>
+                    <div class="bounce-gentle" style="animation-delay: 0.5s;">🌟</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Who We Are
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We're a small indie game studio with a big mission: creating games that bring families together.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="text-6xl mb-6 text-center lg:text-left">👨‍👩‍👧‍👦</div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Family-First Gaming</h3>
+                    <p class="text-gray-600 mb-6">
+                        At Shy Tangerine, we believe that the best games are the ones you can share.
+                        Our games are designed to be enjoyed by kids and parents together, creating
+                        precious moments and lasting memories.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="brand-orange font-bold">✓</span>
+                            </div>
+                            <span class="text-gray-700">Safe, kid-friendly content</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="brand-orange font-bold">✓</span>
+                            </div>
+                            <span class="text-gray-700">Engaging for all ages</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="brand-orange font-bold">✓</span>
+                            </div>
+                            <span class="text-gray-700">Easy to learn, fun to master</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-2xl">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">🎮</div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Our Mission</h4>
+                        <p class="text-gray-700">
+                            "To create magical gaming experiences that bring families closer together,
+                            one game at a time."
+                        </p>
+                        <div class="mt-6 opacity-50">
+                            <div class="shy-logo shy-logo-large mx-auto">
+                                <div class="logo-circle">
+                                    <div class="logo-petal"></div>
+                                    <div class="logo-petal"></div>
+                                    <div class="logo-petal"></div>
+                                    <div class="logo-petal"></div>
+                                    <div class="logo-petal"></div>
+                                    <div class="logo-petal"></div>
+                                    <div class="logo-petal"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Our Games
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Exciting family adventures coming soon!
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Coming Soon Card 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
+                    <div class="text-5xl mb-4 text-center">🌟</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">First Adventure</h3>
+                    <p class="text-gray-600 text-center mb-6">
+                        Our debut game is in development! A magical journey designed for
+                        families to explore together.
+                    </p>
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
+                        <span class="brand-orange font-semibold">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Card 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
+                    <div class="text-5xl mb-4 text-center">🧩</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">Puzzle Paradise</h3>
+                    <p class="text-gray-600 text-center mb-6">
+                        Brain-teasing puzzles that challenge both kids and adults,
+                        perfect for collaborative problem-solving.
+                    </p>
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
+                        <span class="brand-orange font-semibold">In Development</span>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Card 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
+                    <div class="text-5xl mb-4 text-center">🎨</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">Creative Canvas</h3>
+                    <p class="text-gray-600 text-center mb-6">
+                        An artistic adventure where families can create beautiful
+                        masterpieces together.
+                    </p>
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
+                        <span class="brand-orange font-semibold">Planned</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <div class="mt-16 bg-white rounded-2xl p-8 shadow-lg max-w-2xl mx-auto text-center">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Stay Updated!</h3>
+                <p class="text-gray-600 mb-6">
+                    Be the first to know when our games launch and get exclusive behind-the-scenes content.
+                </p>
+                <form class="flex flex-col sm:flex-row gap-4">
+                    <input
+                        type="email"
+                        placeholder="Enter your email address"
+                        class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none"
+                        required
+                    />
+                    <button
+                        type="submit"
+                        class="bg-brand-orange text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
+                    >
+                        Subscribe
+                    </button>
+                </form>
+                <p class="text-gray-500 text-sm mt-3">
+                    🔒 We respect your privacy. No spam, ever.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Our Philosophy
+                </h2>
+                <p class="text-xl text-gray-600">
+                    What drives us to create meaningful family gaming experiences
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🤝</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Togetherness</h3>
+                    <p class="text-gray-600">Games should bring people closer, not isolate them.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🌱</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Growth</h3>
+                    <p class="text-gray-600">Every game should teach something valuable and meaningful.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">😊</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Joy</h3>
+                    <p class="text-gray-600">Fun is the foundation of every experience we create.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🔒</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Safety</h3>
+                    <p class="text-gray-600">A safe, positive environment for players of all ages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 gradient-bg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                Let's Connect!
+            </h2>
+            <p class="text-xl text-orange-100 mb-8">
+                Have questions, ideas, or just want to say hello? We'd love to hear from you!
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+                    <div class="text-3xl mb-3">📧</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Email Us</h3>
+                    <p class="text-orange-100">hello@shytangerine.com</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+                    <div class="text-3xl mb-3">🐦</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Follow Us</h3>
+                    <p class="text-orange-100">@ShyTangerine</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+                    <div class="text-3xl mb-3">💌</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Newsletter</h3>
+                    <p class="text-orange-100">Get game updates</p>
+                </div>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 max-w-2xl mx-auto">
+                <h3 class="text-xl font-bold text-white mb-6">Send us a message</h3>
+                <form class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <input
+                            type="text"
+                            placeholder="Your Name"
+                            class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-orange-100 focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
+                        />
+                        <input
+                            type="email"
+                            placeholder="Your Email"
+                            class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-orange-100 focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
+                        />
+                    </div>
+                    <textarea
+                        rows="4"
+                        placeholder="Your Message"
+                        class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-orange-100 focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none resize-none"
+                    ></textarea>
+                    <button
+                        type="submit"
+                        class="w-full bg-white brand-orange px-8 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-colors"
+                    >
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="shy-logo">
+                            <div class="logo-circle">
+                                <div class="logo-petal"></div>
+                                <div class="logo-petal"></div>
+                                <div class="logo-petal"></div>
+                                <div class="logo-petal"></div>
+                                <div class="logo-petal"></div>
+                                <div class="logo-petal"></div>
+                                <div class="logo-petal"></div>
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <div class="text-xl font-bold text-white">Shy Tangerine</div>
+                            <div class="text-xs text-gray-300 -mt-1">Game Studio</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Creating magical family gaming experiences that bring kids and parents together through the joy of play.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Twitter</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Instagram</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">YouTube</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Studio</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#games" class="hover:text-white transition-colors">Our Games</a></li>
+                        <li><a href="#philosophy" class="hover:text-white transition-colors">Philosophy</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Press Kit</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Shy Tangerine. Made with 🧡 for families everywhere.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Newsletter form handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing! We\'ll keep you updated on our game development journey.');
+        });
+
+        // Contact form handling
+        document.querySelector('#contact form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thanks for reaching out! We\'ll get back to you soon.');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Add scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.card-hover');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize cards with animation
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
